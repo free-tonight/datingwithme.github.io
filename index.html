@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meet Singles Near You</title>
+  <style>
+    :root{--accent:#ff3366;--accent-dark:#ff0055;--bg:#fff;--muted:#666;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#222;-webkit-font-smoothing:antialiased;}
+    .hero{min-height:60vh;background-image:url('assets/images/hero.jpg');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative;}
+    .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.35));}
+    .hero-inner{position:relative;z-index:2;padding:40px 20px;text-align:center;color:#fff;max-width:900px;width:100%;}
+    .title{font-size:30px;margin:0 0 12px;font-weight:700;line-height:1.1;}
+    .subtitle{font-size:16px;margin:0 0 18px;color:#f0f0f0;}
+    .btn-primary{background:var(--accent);color:#fff;padding:12px 22px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer;}
+    .btn-primary:hover{background:var(--accent-dark);}
+    .container{max-width:920px;margin:28px auto;padding:0 18px;}
+    .features{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:18px;}
+    .feature{flex:1 1 220px;background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);text-align:left;}
+    .feature h3{margin:0 0 8px;font-size:16px;}
+    .testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px;}
+    .testimonial{background:#f7f7f7;padding:14px;border-radius:8px;font-size:14px;}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999;}
+    .modal{background:#fff;border-radius:10px;max-width:460px;width:100%;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+    .modal h2{margin:0 0 8px;font-size:18px;}
+    .form-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+    .form-row input,.form-row select{flex:1 1 auto;padding:10px;border-radius:6px;border:1px solid #ddd;font-size:14px;}
+    .small{font-size:13px;color:var(--muted);margin-top:8px;}
+    .results{margin-top:12px;background:#fafafa;padding:12px;border-radius:8px;border:1px solid #eee;max-height:220px;overflow:auto;}
+    .match-item{padding:8px 6px;border-bottom:1px solid #eee;font-size:14px;}
+    .match-item:last-child{border-bottom:none;}
+    footer{padding:20px 10px;text-align:center;color:#666;font-size:13px;background:#fff;margin-top:28px;}
+    @media(max-width:480px){.title{font-size:20px}.subtitle{font-size:14px}.modal{padding:14px}}
+    .fade-in{animation:fadeIn .9s ease both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+
+  <header class="hero" role="banner">
+    <div class="overlay"></div>
+    <div class="hero-inner fade-in">
+      <h1 class="title">Meet Real Singles Near You</h1>
+      <p class="subtitle">Find real people looking to date in your area. Fast, safe, and free to join.</p>
+      <button id="openFinder" class="btn-primary">See who's free tonight</button>
+      <div style="margin-top:12px;color:#e6e6e6;font-size:13px;">Rated 4.9/5 by thousands of members</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="features">
+      <div class="feature fade-in">
+        <h3>Verified Profiles</h3>
+        <p>Most profiles are verified to keep the experience real and safe.</p>
+      </div>
+      <div class="feature fade-in">
+        <h3>Instant Chat</h3>
+        <p>Start conversations immediately after joining — no long waits.</p>
+      </div>
+      <div class="feature fade-in">
+        <h3>Privacy First</h3>
+        <p>Your information remains private. No sharing with third parties.</p>
+      </div>
+    </section>
+
+    <section style="margin-top:26px;">
+      <h2 style="text-align:center">What Members Say</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>"I met someone within a week. The process was simple and secure."</p>
+          <strong>- James, USA</strong>
+        </div>
+        <div class="testimonial">
+          <p>"Real people, real conversations. Highly recommend."</p>
+          <strong>- Sarah, UK</strong>
+        </div>
+        <div class="testimonial">
+          <p>"Easy to use and full of active members in my area."</p>
+          <strong>- Mark, Canada</strong>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:26px;text-align:center;">
+      <h2>Ready to see matches?</h2>
+      <p class="small">Click the button above to check matches near your area and start for free.</p>
+      <a href="https://smartdtsecure.com/S4PTbHKrnS" class="btn-primary" style="margin-top:12px;display:inline-block" target="_blank" rel="noopener">Start Free Now</a>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="finderTitle">
+      <div id="finderContent">
+        <h2 id="finderTitle">Who's free near you tonight?</h2>
+        <div style="margin-top:8px;color:#666;font-size:13px;">Enter your country, location, and preferred age range.</div>
+
+        <div class="form-row" style="margin-top:12px;">
+          <select id="country">
+            <option value="USA">United States</option>
+            <option value="UK">United Kingdom</option>
+            <option value="Canada">Canada</option>
+          </select>
+          <input type="text" id="location" placeholder="Your city or zip code" />
+        </div>
+
+        <div class="form-row">
+          <select id="ageRange">
+            <option value="18-24">18-24</option>
+            <option value="25-30">25-30</option>
+            <option value="31-40">31-40</option>
+            <option value="41+">41+</option>
+          </select>
+          <button id="showMatches" class="btn-primary" style="padding:10px 14px">Show Matches</button>
+        </div>
+
+        <div id="searching" class="small" style="display:none;margin-top:8px;">Searching nearby users...</div>
+        <div id="results" class="results" style="display:none;"></div>
+
+        <div id="finalCta" style="display:none;margin-top:12px;text-align:center;">
+          <p style="margin:0 0 8px;">Want to chat with them? Create your free account now.</p>
+          <a id="finalLink" href="https://smartdtsecure.com/S4PTbHKrnS" class="btn-primary" target="_blank" rel="noopener">Start Free Now</a>
+        </div>
+
+        <div style="margin-top:10px;text-align:right;">
+          <button id="closeModal" style="background:none;border:none;color:#777;cursor:pointer;font-size:13px;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>© 2025 Dating Network. All rights reserved.</div>
+    <div style="margin-top:6px;color:#999;font-size:13px;">For adults 18+ only. This is not a guarantee of results. By joining, you agree to our Terms & Privacy Policy.</div>
+  </footer>
+
+  <script>
+    const openBtn = document.getElementById('openFinder');
+    const modal = document.getElementById('modalBackdrop');
+    const closeBtn = document.getElementById('closeModal');
+    const showBtn = document.getElementById('showMatches');
+    const searching = document.getElementById('searching');
+    const resultsEl = document.getElementById('results');
+    const finalCta = document.getElementById('finalCta');
+    const countryEl = document.getElementById('country');
+    const ageEl = document.getElementById('ageRange');
+
+    const names = {
+      "USA": ["Emily, 25","Olivia, 27","Sophia, 24","Mia, 28","Ava, 26"],
+      "UK": ["Emily, 25","Sophie, 26","Olivia, 27","Amelia, 24","Isabella, 29"],
+      "Canada": ["Emma, 26","Olivia, 25","Ava, 27","Sophia, 24","Chloe, 28"]
+    };
+
+    function openModal(){ modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); document.getElementById('location').focus(); }
+    function closeModalFunc(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); resetFinder(); }
+
+    function resetFinder(){
+      searching.style.display='none';
+      resultsEl.style.display='none';
+      resultsEl.innerHTML='';
+      finalCta.style.display='none';
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModalFunc);
+
+    showBtn.addEventListener('click', function(){
+      const loc = document.getElementById('location').value.trim();
+      const country = countryEl.value;
+      if(!loc){
+        alert('Please enter your city or zip code.');
+        return;
+      }
+      searching.style.display='block';
+      resultsEl.style.display='none';
+      finalCta.style.display='none';
+      resultsEl.innerHTML='';
+      setTimeout(()=>{
+        searching.style.display='none';
+        const pool = names[country] || [];
+        const count = Math.min(3, pool.length);
+        const selected = [];
+        while(selected.length < count){
+          const pick = pool[Math.floor(Math.random()*pool.length)];
+          if(!selected.includes(pick)) selected.push(pick);
+        }
+        resultsEl.style.display='block';
+        resultsEl.innerHTML = '<strong>'+selected.length+' matches found near '+loc+', '+country+':</strong><br/>';
+        selected.forEach(n=>{
+          const div = document.createElement('div');
+          div.className = 'match-item';
+          div.textContent = n;
+          resultsEl.appendChild(div);
+        });
+        finalCta.style.display='block';
+      }, 1200);
+    });
+
+    modal.addEventListener('click', function(e){ if(e.target === modal){ closeModalFunc(); } });
+
+  </script>
+</body>
+</html>
